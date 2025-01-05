@@ -1,0 +1,5 @@
+# Cron job for Sarah's Apache backup at 2:00 AM daily
+0 2 * * * /DevOps_Env-Setup/sarah/apache_backup.sh >> /dev/null 2>&1
+
+# Cron job for Mike's Nginx backup at 2:30 AM daily
+30 2 * * * /DevOps_Env-Setup/mike/nginx_backup.sh >> /dev/null 2>&1
