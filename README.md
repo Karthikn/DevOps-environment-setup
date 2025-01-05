@@ -1,115 +1,117 @@
+## Updated Repo Structure and Documentation for DevOps Environment Setup
+
+### Repository Structure
+```
+/DevOps_Env-Setup/  
+├── backups/  
+│   ├── apache_backup_YYYY-MM-DD.tar.gz  # Apache backup archives  
+│   └── nginx_backup_YYYY-MM-DD.tar.gz   # Nginx backup archives  
+├── cron_jobs/  
+│   └── crontab                          # Cron job configurations for automated backups  
+├── logs/  
+│   ├── apache_backup.log                # Log file for Apache backup operations  
+│   └── nginx_backup.log                 # Log file for Nginx backup operations  
+├── scripts/  
+│   ├── apache_backup.sh                 # Script for Apache server backup automation  
+│   ├── nginx_backup.sh                  # Script for Nginx server backup automation  
+│   └── ci_cd_wrapper.sh                 # Wrapper script for backup and CI/CD automation  
+├── users/  
+│   ├── mike/                            # Directory for user Mike’s scripts and files  
+│   └── sarah/                           # Directory for user Sarah’s scripts and files  
+└── README.md                            # Repository documentation  
+```
+
+### Updated Documentation (README.md)
+
 # DevOps Environment Setup
 
 ## Overview
-This project automates backups for Apache and Nginx servers. The scripts are scheduled using cron jobs and include logging for monitoring.
+This project automates backups for Apache and Nginx servers using shell scripts scheduled via cron jobs, with detailed logging for monitoring purposes.
 
-Table of Contents
-Project Overview
-Features Implemented
-Repository Structure
-How to Use the Project
-Workflow Details
-Ownership and License
-Releases
-Acknowledgments
+## Features
+- **Automated Backup Scripts**:
+  - Back up essential directories for Apache and Nginx servers.
+  - Store backups in a structured directory with date-based naming conventions.
+  - Maintain logs for each backup operation.
+- **Cron Job Integration**:
+  - Schedule daily backups at specified times.
+- **Centralized Backup Execution**:
+  - Use a wrapper script to trigger all backups manually.
+- **Organized Repository Structure**:
+  - Separate directories for scripts, logs, cron jobs, and user-specific files.
 
-
-Project Overview
-This repository contains solutions for the Hero Vired DevOps Assignment. It demonstrates practical implementation of backup automation using shell scripts, cron jobs, and CI/CD integration.
-
-Features Implemented
-1. Automated Backup Scripts
-Apache Server Backup:
-
-Backs up /etc/apache2/ configuration and /var/www/html/ directory.
-Saves backups to /backups/ with a date-based naming convention.
-Nginx Server Backup:
-
-Backs up /etc/nginx/ configuration and /usr/share/nginx/html/ directory.
-Saves backups to /backups/ with a date-based naming convention.
-Error Logging:
-
-Both scripts generate detailed logs for each operation.
-2. Cron Job Integration
-Scheduled backups daily:
-Apache backup runs at 2:00 AM.
-Nginx backup runs at 2:30 AM.
-3. Centralized Backup Script
-A single wrapper script (Script.sh) allows manual execution of all backups.
-4. Organized Repository Structure
-Ensures clear separation of scripts, logs, and cron configurations.
-Repository Structure
-plaintext
-Copy code
+## Repository Structure
+```
 /DevOps_Env-Setup/  
-├── mike/  
-│   ├── nginx_backup.sh        # Script for Nginx server backup automation  
-│   └── nginx_backup.log       # Log file for Nginx backup operations  
-├── sarah/  
-│   ├── apache_backup.sh       # Script for Apache server backup automation  
-│   └── apache_backup.log      # Log file for Apache backup operations  
-├── cron_jobs/  
-│   ├── crontab                # Cron job configurations for automated backups  
 ├── backups/  
-│   ├── apache_backup_YYYY-MM-DD.tar.gz # Apache backup archives  
-│   └── nginx_backup_YYYY-MM-DD.tar.gz  # Nginx backup archives  
-├── Script.sh                  # Wrapper script for backup and CI/CD automation  
-└── README.md                  # Repository documentation  
-How to Use the Project
-Prerequisites
-Linux/Unix system with shell access.
-Cron daemon installed and running.
-Steps to Clone and Use
-Clone the repository:
+│   ├── apache_backup_YYYY-MM-DD.tar.gz  
+│   └── nginx_backup_YYYY-MM-DD.tar.gz   
+├── cron_jobs/  
+│   └── crontab                          
+├── logs/  
+│   ├── apache_backup.log                
+│   └── nginx_backup.log                 
+├── scripts/  
+│   ├── apache_backup.sh                 
+│   ├── nginx_backup.sh                  
+│   └── ci_cd_wrapper.sh                 
+├── users/  
+│   ├── mike/                            
+│   └── sarah/                           
+└── README.md                            
+```
 
-bash
-Copy code
-git clone https://github.com/Karthikn/DevOps_Env-Setup.git  
-Navigate to the repository:
+## How to Use
+### Prerequisites
+- A Linux/Unix system with shell access.
+- Cron daemon installed and running.
 
-bash
-Copy code
-cd DevOps_Env-Setup  
-Run the backup scripts manually:
+### Steps to Clone and Use
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Karthikn/DevOps_Env-Setup.git
+   ```
+2. Navigate to the repository:
+   ```bash
+   cd DevOps_Env-Setup
+   ```
+3. Run backup scripts manually:
+   ```bash
+   sudo ./scripts/apache_backup.sh
+   sudo ./scripts/nginx_backup.sh
+   ```
+4. Use the wrapper script for all backups:
+   ```bash
+   sudo ./scripts/ci_cd_wrapper.sh
+   ```
+5. Verify backup files:
+   ```bash
+   ls /backups/
+   tar -tzf /backups/apache_backup_YYYY-MM-DD.tar.gz
+   tar -tzf /backups/nginx_backup_YYYY-MM-DD.tar.gz
+   ```
 
-bash
-Copy code
-sudo ./sarah/apache_backup.sh  
-sudo ./mike/nginx_backup.sh  
-Run all backups via the centralized script:
+## Workflow Details
+- **Cron Job Integration**:
+  - Apache Backup: 2:00 AM daily.
+  - Nginx Backup: 2:30 AM daily.
+- **Error Logging**:
+  - Logs are stored in `/logs/`.
+- **Centralized Backup Execution**:
+  - Manual execution is supported via `ci_cd_wrapper.sh`.
 
-bash
-Copy code
-sudo ./Script.sh  
-Verify backup files:
+## Ownership and License
+- **Owner**: Karthikn
+- **License**: Proprietary, unauthorized use, reproduction, or distribution is prohibited.
 
-bash
-Copy code
-ls /backups/  
-tar -tzf /backups/apache_backup_YYYY-MM-DD.tar.gz  
-tar -tzf /backups/nginx_backup_YYYY-MM-DD.tar.gz  
-Workflow Details
-Cron Job Integration
-Configured to run daily backups:
-plaintext
-Copy code
-# Apache Backup (Sarah) at 2:00 AM  
-0 2 * * * /DevOps_Env-Setup/sarah/apache_backup.sh >> /dev/null 2>&1  
+## Releases
+- **Version 1.0**: Initial release with fully functional backup scripts and cron integration.
 
-# Nginx Backup (Mike) at 2:30 AM  
-30 2 * * * /DevOps_Env-Setup/mike/nginx_backup.sh >> /dev/null 2>&1  
-Error Logging
-Logs stored in respective directories (apache_backup.log, nginx_backup.log).
-Centralized Backup Execution
-Manual execution supported via Script.sh.
-Ownership and License
-Ownership
-Owner: Karthikn
-License
-This project is proprietary and owned by Karthikn. Unauthorized use, reproduction, or distribution of any part of this repository is prohibited.
+## Acknowledgments
+- Hero Vired Assignment Guidelines.
+- Resources for Cron and Shell Scripting.
 
-Releases
-Version 1.0: Initial version with fully functional backup scripts for Apache and Nginx.
-Acknowledgments
-Hero Vired Assignment Guidelines
-Cron and Shell Scripting Resources
+---
+
+The updated repository structure and documentation now provide a clear and organized overview of the DevOps Environment Setup project, ensuring better maintainability and usability.
+
