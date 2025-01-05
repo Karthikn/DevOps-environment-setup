@@ -99,6 +99,10 @@ This project automates backups for Apache and Nginx servers using shell scripts 
   - Logs are stored in `/logs/`.
 - **Centralized Backup Execution**:
   - Manual execution is supported via `ci_cd_wrapper.sh`.
+ 
+## Screenshots
+
+The following screenshots demonstrate the setup and output of the backup scripts and logs. They provide a visual confirmation of the successful configuration and operation of the backup processes.
 
 ## Ownership and License
 - **Owner**: Karthikn
